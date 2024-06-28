@@ -9,14 +9,15 @@ public class Vote {
     private Long id;
     private int rating;
 
-    public Movie getMovie() {
-        return movie;
-    }
+    @ManyToOne
+    @JoinColumn(name = "movie_id")
+    private Movie movie;
 
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-    }
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -33,6 +34,14 @@ public class Vote {
         this.rating = rating;
     }
 
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
+
     public User getUser() {
         return user;
     }
@@ -40,9 +49,4 @@ public class Vote {
     public void setUser(User user) {
         this.user = user;
     }
-
-    @ManyToOne
-    private Movie movie;
-    @ManyToOne
-    private User user;
 }

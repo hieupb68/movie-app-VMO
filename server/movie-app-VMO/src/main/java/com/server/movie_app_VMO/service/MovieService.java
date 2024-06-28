@@ -11,6 +11,16 @@ import java.util.List;
 public class MovieService {
     @Autowired
     private MovieRepository movieRepository;
-    public List<Movie> getAllMovies() { return movieRepository.findAll(); }
-    public Movie getMovieById(Long id) { return movieRepository.findById(id).orElse(null); }
+
+    public List<Movie> searchMovies(String title) {
+        return movieRepository.findByTitleContaining(title);
+    }
+
+    public Movie saveMovie(Movie movie) {
+        return movieRepository.save(movie);
+    }
+
+    public void deleteMovie(Long id) {
+        movieRepository.deleteById(id);
+    }
 }

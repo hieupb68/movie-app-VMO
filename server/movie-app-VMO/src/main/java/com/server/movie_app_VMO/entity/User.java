@@ -1,15 +1,31 @@
 package com.server.movie_app_VMO.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String username;
+    private String email;
+
+    @OneToMany(mappedBy = "user")
+    private List<Comment> comments;
+
+    @OneToMany(mappedBy = "user")
+    private List<Vote> votes;
+
+    // Getters and setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -27,14 +43,19 @@ public class User {
         this.email = email;
     }
 
-    public Long getId() {
-        return id;
+    public List<Comment> getComments() {
+        return comments;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
-    private String username;
-    private String email;
+    public List<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(List<Vote> votes) {
+        this.votes = votes;
+    }
 }
